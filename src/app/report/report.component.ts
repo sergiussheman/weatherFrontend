@@ -14,6 +14,7 @@ declare var $: any;
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent implements OnInit {
+  showTable: boolean = false;
   pager: any = {};
   users: User[] = [];
   locations: Location[] = [];
@@ -68,6 +69,7 @@ export class ReportComponent implements OnInit {
         this.queryLogs = result;
         this.allQueryLogs = this.queryLogs.slice();
         this.setPage(1);
+        this.showTable = true;
       }, error => {
         this.toastr.error('Error while loading logs. Try again later...', 'ERROR');
       });

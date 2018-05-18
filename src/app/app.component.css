@@ -3,11 +3,16 @@
     border: 1px black;
     border-bottom: 1px solid #337ab7;
     padding-left: 10px;
+    padding: 5px;
   }
   
   .cometflowHeader label {
     color: #337ab7;
     font-size: 2em;
     margin-bottom: 0;
+  }
+
+  .cometflowHeader a {
+    padding-left: 15px;
   }
   

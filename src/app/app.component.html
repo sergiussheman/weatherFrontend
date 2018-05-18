@@ -1,11 +1,13 @@
 <!-- main app container -->
 
 <form name="header" class="form-horizontal" >
-  <div class="navbar-fixed-top cometflowHeader">
-    <label>Weather</label>
-    <a [routerLink]="['/location']" style="padding-left: 15px;" *ngIf="hasRole('ADMIN')">Location</a>
-    <a [routerLink]="['/user']" style="padding-left: 15px;" *ngIf="hasRole('ADMIN')">User</a>
-    <a [routerLink]="['/report']" style="padding-left: 15px;" *ngIf="isAuthorized()">Report</a>
+  <div class="navbar-fixed-top cometflowHeader" >
+    <a [routerLink]="['/']" ><b>Weather</b></a>
+    <a [routerLink]="['/location']"  *ngIf="hasRole('ADMIN')">Location</a>
+    <a [routerLink]="['/user']"  *ngIf="hasRole('ADMIN')">User</a>
+    <a [routerLink]="['/report']" *ngIf="isAuthorized()">Report</a>
+
+    <a [routerLink]="['/login']" style="float: right; margin-right: 20px;" *ngIf="isAuthorized()">Log out</a>
   </div>
 
 </form>
