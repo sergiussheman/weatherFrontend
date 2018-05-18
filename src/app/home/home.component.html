@@ -14,6 +14,7 @@
     <h2>{{condition.current_observation.display_location.full}}</h2>
     <div class="col-sm-6">
       <img class="sunnyImage" src="../../assets/icons/cloudy.png" *ngIf="checkSunCondition('cloudy')">
+      <img class="sunnyImage" src="../../assets/icons/cloudy.png" *ngIf="checkSunCondition('overcast')">
       <img class="sunnyImage" src="../../assets/icons/sunny.png" *ngIf="checkSunCondition('clear')">
     </div>
     <div class="col-sm-6 align-middle">

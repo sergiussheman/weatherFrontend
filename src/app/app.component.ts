@@ -14,7 +14,10 @@ import 'rxjs/add/observable/timer';
 export class AppComponent {
   title = 'app';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, 
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
     ngOnInit() {
       //tick every 15 minutes
@@ -41,5 +44,10 @@ export class AppComponent {
 
   isAuthorized(): boolean {
     return this.authService.isAuthorized();
+  }
+
+  logOut() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

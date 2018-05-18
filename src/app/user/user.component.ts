@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
       .subscribe(result => {
         this.toastr.success('User was updated', 'SUCCESS');
         this.updateUsers();
-        $('#addUserModal').modal('hide');
+        $('#editUserModal').modal('hide');
         console.log(result);
       }, error => {
         this.toastr.error('Error while saving user', 'ERROR');
