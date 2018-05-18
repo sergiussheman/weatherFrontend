@@ -1,0 +1,183 @@
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Manage
+            <b>Users</b>
+          </h2>
+        </div>
+        <div class="col-sm-6">
+          <a href="#editUserModal" (click)="setEditUser({})" class="btn btn-success" data-toggle="modal">
+            <i class="material-icons"></i>
+            <span>Add New User</span>
+          </a>
+          <a href="#deleteUserModal" class="btn btn-danger" data-toggle="modal">
+            <i class="material-icons"></i>
+            <span>Delete</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>
+            <span class="custom-checkbox">
+              <input id="selectAll" type="checkbox">
+              <label for="selectAll"></label>
+            </span>
+          </th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>email</th>
+          <th>password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+            <span class="custom-checkbox">
+              <input id="checkbox1" name="options[]" value="1" type="checkbox" [(ngModel)]="user.isSelected">
+              <label for="checkbox1"></label>
+            </span>
+          </td>
+          <td>{{user.username}}</td>
+          <td>{{user.role}}</td>
+          <td>{{user.email}}</td>
+          <td>*********</td>
+          <td>
+            <a *ngIf="!user.root" href="#editUserModal" (click)="setEditUser(user)" class="edit" data-toggle="modal">
+              <i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i>
+            </a>
+            <a *ngIf="!user.root" href="#deleteUserModal" (click)="selectUser(user)" class="delete" data-toggle="modal">
+              <i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i>
+            </a>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <div class="clearfix">
+      <div class="hint-text">Showing
+        <b>{{users.length}}</b> out of
+        <b>{{allUsers.length}}</b> entries</div>
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="pager.currentPage === 1">
+          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" [class.active]="page === pager.currentPage" *ngFor="let page of pager.pages">
+          <a (click)="setPage(page)" class="page-link">{{page}}</a>
+        </li>
+        <li class="page-item" [class.disabled]="pager.currentPage === pager.endPage">
+          <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="addUserModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <h4 class="modal-title">Add User</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" required="" type="text">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" required="" type="email">
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <textarea class="form-control" required=""></textarea>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input class="form-control" required="" type="text">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input class="btn btn-default" data-dismiss="modal" value="Cancel" type="button">
+          <input class="btn btn-success" value="Add" type="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="editUserModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <h4 class="modal-title">Edit User</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Username</label>
+            <input class="form-control" required="" type="text" [(ngModel)]="editUser.username" name="username">
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <select class="form-control" [(ngModel)]="editUser.role" name="role">
+              <option [ngValue]="">Select Role for User</option>
+              <option [ngValue]="'ADMIN'">ADMIN</option>
+              <option [ngValue]="'USER'">USER</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" required="" type="email" [(ngModel)]="editUser.email" name="email">
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" required="" type="password" [(ngModel)]="editUser.password" name="password">
+          </div>
+          <div class="form-group">
+            <label>Password again</label>
+            <input class="form-control" required="" type="password" [(ngModel)]="editUser.passwordAgain" name="passwordAgain">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input class="btn btn-default" data-dismiss="modal" value="Cancel" type="button">
+          <input class="btn btn-info" value="Save" type="submit" (click)="saveUser()">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="deleteUserModal" class="modal fade" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <h4 class="modal-title">Delete User</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete selected Records?</p>
+          <p class="text-warning">
+            <small>This action cannot be undone.</small>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <input class="btn btn-default" data-dismiss="modal" value="Cancel" type="button">
+          <input class="btn btn-danger" value="Delete" type="submit" (click)="deleteSelectedUsers()">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

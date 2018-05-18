@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="col-sm-6 col-sm-offset-3">
+    <ng-select name="location" [items]="locations" bindLabel="city" bindValue="id" placeholder="Your city name" [(ngModel)]="selectedLocationId">
+    </ng-select>
+  </div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" (click)="fetchCondition()">
+      <i class="fa fa-question-circle"></i>
+      <label>Search</label>
+    </button>
+  </div>
+
+  <div id="conditionBlock" class="col-sm-6 col-sm-offset-3 text-center" *ngIf="condition != null">
+    <h2>{{condition.current_observation.display_location.full}}</h2>
+    <div class="col-sm-6">
+      <img class="sunnyImage" src="../../assets/icons/cloudy.png" *ngIf="checkSunCondition('cloudy')">
+      <img class="sunnyImage" src="../../assets/icons/sunny.png" *ngIf="checkSunCondition('clear')">
+    </div>
+    <div class="col-sm-6 align-middle">
+      <div class="row">
+        <label>Temperature:</label>
+        <label>{{condition.current_observation.temperature_string}}</label>
+      </div>
+      <div class="row">
+        <label>Fells Like:</label>
+        <label>{{condition.current_observation.feelslike_string}}</label>
+      </div>
+    </div>
+  </div>
+</div>
